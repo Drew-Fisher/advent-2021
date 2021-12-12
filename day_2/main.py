@@ -20,8 +20,21 @@ def calculatePosition(inputs):
         elif x[0] == "up":
             depth -= x[1]
     calc = depth * forward
-    print(depth)
-    print(forward)
-    print(calc)
 
-calculatePosition(inputs)
+print(calculatePosition(inputs))
+
+def calculatePositionWithAim(inputs):
+    horizontal_position = 0
+    aim = 0
+    depth = 0
+    for x in inputs:
+        if x[0] == "forward":
+            horizontal_position += x[1]
+            depth += (aim*x[1])
+        elif x[0] == "down":
+            aim += x[1]
+        elif x[0] == "up":
+            aim -= x[1]
+    return depth*horizontal_position
+
+print(calculatePositionWithAim(inputs))
