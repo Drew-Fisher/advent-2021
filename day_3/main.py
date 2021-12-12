@@ -5,6 +5,7 @@ def readInput():
     given_file.close()
     return inputs
 
+
 inputs = readInput()
 
 
@@ -27,7 +28,6 @@ def calculateBits(inputs,size):
             delta += "1"
     print("gamma: ",gamma," delta: ",delta)
     return int(gamma,2)*int(delta,2)
-
 
 
 print(calculateBits(inputs,len(inputs[0])-1))
