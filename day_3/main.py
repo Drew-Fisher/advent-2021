@@ -1,6 +1,4 @@
-from setuptools._vendor.more_itertools import strip
-
-
+#read in bits from file
 def readInput():
     given_file = open('input.txt', 'r')
     lines = given_file.readlines()
@@ -8,7 +6,7 @@ def readInput():
     given_file.close()
     return inputs
 
-
+#creates an array on ints adds 1 to int in index for every 1 in binary value from input at same index
 def calculateBits(inputs):
     size = len(inputs[0])
     counts = [0]*size
@@ -18,34 +16,36 @@ def calculateBits(inputs):
     print("Total: ",len(inputs), "Counts: ",counts)
     return counts
 
-
+#calculates if 1 or 0 is most common by comparing total count of 1s for each index if greater then total input/2 1 is more common if not then 0 ties are always 1s
 def calculateMostCommon(counts,total):
     gamma = ''
-    delta = ''
+    epsilon = ''
     for x in counts:
         if x > total/2:
             gamma += "1"
-            delta += "0"
+            epsilon += "0"
         elif x == total/2:
             gamma += "1"
-            delta += "0"
+            epsilon += "0"
         else:
             gamma += "0"
-            delta += "1"
-    print("gamma: ",gamma," delta: ",delta)
-    return [gamma,delta]
+            epsilon += "1"
+    print("gamma:",gamma," delta:",epsilon)
+    return [gamma,epsilon]
 
+
+#returns gamma * epsilon from array of 2 bit strings
 def calculateRadiation(report):
     return int(report[0],2)*int(report[1],2)
 
 
 inputs = readInput()
 counts = calculateBits(inputs)
-print(counts)
+print("frequency counts:",counts)
 RadiationReport = calculateMostCommon(counts,len(inputs))
-print(RadiationReport)
+print("Radiation binaries",RadiationReport)
 RadiationResault = calculateRadiation(RadiationReport)
-print(RadiationResault)
+print("PowerConsumption =",RadiationResault)
 
 #Part 2
 
@@ -67,6 +67,7 @@ def getLeastCommonAtIndex(inputs,index):
         return zeros
     else:
         return [x for x in inputs if x[index] == "1"]
+
 
 def calculateO2(inputs,index):
     if len(inputs) > 0:
@@ -99,7 +100,7 @@ def calculateCO2(inputs,index):
 def calculatetLifeSupport(inputs):
     O2 = calculateO2(inputs,0)
     CO2 = calculateCO2(inputs,0)
-    print("O2: ",O2," CO2:",CO2)
+    print("O2 Binary:",O2," CO2 Binary:",CO2)
     return int(O2,2) * int(CO2,2)
 
-print(calculatetLifeSupport(inputs))
+print("Life Support Report =",calculatetLifeSupport(inputs))
